@@ -1,1 +1,32 @@
-/node_modules/
+/front/node_modules/
+
+### BACK ###
+
+###> symfony/framework-bundle ###
+/back/.env
+/back/.env.local
+/back/.env.local.php
+/back/.env.*.local
+/back/composer.lock
+/back/config/secrets/prod/prod.decrypt.private.php
+/back/public/bundles/
+/back/var/
+/back/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+/back/.phpunit
+/back/.phpunit.result.cache
+/back/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> symfony/webpack-encore-bundle ###
+/back/node_modules/
+/back/public/build/
+/back/npm-debug.log
+/back/yarn-error.log
+###< symfony/webpack-encore-bundle ###
+
+###> lexik/jwt-authentication-bundle ###
+#/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
