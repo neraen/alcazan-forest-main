@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: ./chusei/Dockerfile.nginx
+    volumes:
+       - type: bind
+         source: /root/.acme.sh/alcazan-forest.com
+         target: /certs
+    depends_on:
+      - fpm
+    ports:
+      - 80:80
+      - 443:443
+  mysql:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - type: volume
+        source: dbprod
+        target: /var/lib/mysql
+  fpm:
+    build:
+      context: .
+      dockerfile: ./chusei/Dockerfile.fpm
+    volumes:
+      - type: volume
+        target: /app/chusei/vendor
+      - type: bind
+        target: /app/chusei
+        source: .
+    depends_on:
+      - mysql
+
+  node:
+    build:
+      context: .
+      dockerfile: ./alcazan-forest-front/Dockerfile.front.prod
+    volumes:
+      - type: volume
+        target: /app/alcazan-forest-front/node_modules
+      - type: bind
+        target: /app/alcazan-forest-front
+        source: .
+
+volumes:
+  dbprod:

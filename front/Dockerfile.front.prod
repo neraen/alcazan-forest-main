@@ -1,0 +1,6 @@
+FROM node:lts
+WORKDIR /app
+COPY ./alcazan-forest-front/package.json .
+RUN yarn
+COPY ./alcazan-forest-front .
+CMD ["yarn", "build"]
