@@ -7,6 +7,7 @@ class EditableCase extends React.Component{
 
 
     async handleClick(){
+        /** refactor cette partie la avec des composants dediés */
         switch (this.props.mapMaker.mode.type){
             case "collision":
                 const cases =  [...this.props.mapMaker.cases];
